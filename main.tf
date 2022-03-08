@@ -13,21 +13,28 @@ terraform {
 
 #Declare Variables
 
-variable "client_secret" {}
+variable "mikey_client_secret" {}
 
-variable "subscription_id" {}
+variable "mikey_subscription_id" {}
 
-variable "client_id"{}
+variable "mikey_client_id"{}
 
-variable "tenant_id" {}
+variable "mikey_tenant_id" {}
 
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
 
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  tenant_id       = var.tenant_id
+  subscription_id = var.mikey_subscription_id
+  client_id       = var.mikey_client_id
+  client_secret   = var.mikey_client_secret
+  tenant_id       = var.mikey_tenant_id
+}
+
+# Create a resource group for the demo
+
+resource "azurerm_resource_group" "has_demo_rg" {
+  name     = "has_demo_rg"
+  location = "WestUS2"
 }
