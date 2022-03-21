@@ -21,7 +21,6 @@ variable "mikey_client_id"{}
 
 variable "mikey_tenant_id" {}
 
-variable "region" {}
 
 
 # Configure the Microsoft Azure Provider
