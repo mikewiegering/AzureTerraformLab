@@ -1,0 +1,52 @@
+#use ubuntu package manager to install docker and pull basic web app for demo
+
+- name: "updating apt packages"
+  apt:
+    update_cache: yes
+
+- name: "Dockers official GPG key"
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+- name: "Add Docker APT repository"
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+    state: present
+
+- name: "Add docker depends"
+  apt:
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common'] 
+    state: present
+
+- name: "Installing Docker"
+  apt:
+    name: ['docker-ce', 'docker-ce-cli','containerd.io','python-pip']
+    state: present
+
+- name: "Change user perms for Docker"
+  command: usermod -aG docker $USER
+
+- name: "Installing the python docker SDK to build docker images"
+  pip:
+    name: docker
+    state: present
+
+- name: "clone docker container image from docker hub repo"
+  command: docker pull mxracer409/azuredemowebapp:flaskapp
+
+#- name: "docker start container"
+#  docker_container:
+#    name: flaskapp1
+#    image: mxracer409/azuredemowebapp:flaskapp
+#    state: started
+#    restart: yes
+#    ports:
+#      - "80:80"
+
+- name: "docker start container"
+  command: docker container run -d -p 80:80 mxracer409/azuredemowebapp:flaskapp
+
+
+
+
+
+

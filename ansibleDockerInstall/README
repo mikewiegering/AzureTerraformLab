@@ -1,0 +1,7 @@
+How to use: 
+
+First place the IP's of the hosts in the hosts file
+
+
+then use this ansible command to execute the Docker install and creation of the basic webapp for the azure demo. 
+ansible-playbook playbook.yml -i hosts -c ssh --ask-pass --ask-become-pass --become-user root -k --ssh-extra-args='-o StrictHostKeyChecking=no'
