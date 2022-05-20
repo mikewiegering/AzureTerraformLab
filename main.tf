@@ -21,7 +21,7 @@ variable "mikey_client_id"{}
 
 variable "mikey_tenant_id" {}
 
-
+variable "location" {}
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
@@ -37,5 +37,5 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "has_demo_rg" {
   name     = "has_demo_rg"
-  location = "EastUS2"
+  location = var.location
 }

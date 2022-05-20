@@ -157,3 +157,18 @@ resource "azurerm_linux_virtual_machine" "has_demo_spoke2_vm_green" {
     version   = "latest"
   }
 }
+
+
+module "linuxservers" {
+  source              = "Azure/compute/azurerm"
+  resource_group_name = azurerm_resource_group.has_demo_rg.name
+  vm_os_simple        = "UbuntuServer"
+  nb_public_ip        = 0
+  vnet_subnet_id      = azurerm_subnet.has_demo_spoke2_subnet_green.id
+  admin_username      = "demouser"
+  admin_password      = "WWTwwtWWTwwt1!"
+  enable_ssh_key      = false
+ depends_on = [
+   azurerm_resource_group.has_demo_rg
+ ]
+}
